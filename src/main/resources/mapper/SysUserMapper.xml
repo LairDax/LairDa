@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot2demo.mapper.SysUserMapper">
+
+    <select id="listSysUserMessage" parameterType="com.example.springboot2demo.model.dto.SysUserDTO"
+            resultType="com.example.springboot2demo.model.vo.SysUserVO">
+        SELECT
+            id,
+            NAME,
+            user_password,
+            nick_name,
+            id_card,
+            sex,
+            tel,
+            create_by,
+            create_on,
+            update_by,
+            update_on,
+            delete_flag
+        FROM
+            sys_user
+        WHERE
+            1 = 1
+        <if test="dto.name !=null and dto.name!=''">
+            AND name = #{dto.name}
+        </if>
+    </select>
+    <select id="getSysUserById" resultType="com.example.springboot2demo.model.vo.SysUserVO">
+        SELECT
+        id,
+        NAME,
+        user_password,
+        nick_name,
+        id_card,
+        sex,
+        tel,
+        create_by,
+        create_on,
+        update_by,
+        update_on,
+        delete_flag
+        FROM
+        sys_user
+        WHERE
+        1 = 1
+        <if test="id !=null and id!=''">
+            AND id = #{id}
+        </if>
+    </select>
+</mapper>
