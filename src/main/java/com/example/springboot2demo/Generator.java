@@ -3,6 +3,7 @@ package com.example.springboot2demo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.example.springboot2demo.config.BaseEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Arrays;
@@ -26,7 +27,6 @@ public class Generator {
                 .globalConfig(builder -> builder
                         .author("xnd")
                         .enableSwagger()
-                        .fileOverride()
                         .disableOpenDir()
                         .outputDir(projectPath  + "/src/main/java"))
                 .packageConfig(builder ->builder.parent("com.example.springboot2demo")
@@ -51,7 +51,7 @@ public class Generator {
                         .superClass(BaseEntity.class)
                         .enableTableFieldAnnotation()
                         .enableRemoveIsPrefix()
-                        .addSuperEntityColumns("id",
+                        .addSuperEntityColumns(
                                 "delete_flag",
                                 "create_by",
                                 "create_on",

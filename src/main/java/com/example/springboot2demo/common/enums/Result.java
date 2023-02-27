@@ -42,6 +42,10 @@ public class Result<T> {
         this.code = code;
         this.data = data;
     }
+    private Result(String msg, int code) {
+        this.msg = msg;
+        this.code = code;
+    }
 
     public static <T> Result<T> success(T date) {
         return new Result<>(date, DataEnums.SUCCESS);
@@ -55,8 +59,8 @@ public class Result<T> {
         return new Result<>(DataEnums.FAILED.getMsg(), DataEnums.FAILED);
     }
 
-    public static <T> Result<T> failed(int code) {
-        return new Result<>(code);
+    public static <T> Result<T> failed( String msg ,int code) {
+        return new Result<>(msg,code);
     }
 
     public static <T> Result<T> failed(String msg) {
@@ -74,5 +78,6 @@ public class Result<T> {
     public static <T> Result<T> failed(DataEnums enums, T data) {
         return new Result<>(data, enums);
     }
+
 
 }

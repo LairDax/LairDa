@@ -1,4 +1,4 @@
-package com.example.springboot2demo.model.vo;
+package model.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;

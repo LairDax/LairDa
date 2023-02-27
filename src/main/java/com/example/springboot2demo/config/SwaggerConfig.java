@@ -1,4 +1,4 @@
-package com.example.springboot2demo.Config.swagger;
+package com.example.springboot2demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,23 +28,22 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)  // 2
                 .pathMapping("/")
                 .enable(true)
-                .host("localhost:8888")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.springboot2demo.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .protocols(newHashSet("https", "http"))
-                .securitySchemes(singletonList(apiKey()))
-                .securityContexts(singletonList(securityContext()));
+                .securitySchemes(singletonList(apiKey()));
+//                .securityContexts(singletonList(securityContext()));
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("LairDa")
                 .description("LairDa (SpringBoot2.7.7 + Swagger2.9.2)")
-                .contact(new Contact("LairDa", "http:localhost:8888/doc.html", "1721417139@qq.com"))
+                .contact(new Contact("LairDa", "http://localhost:9001/doc.html", "1721417139@qq.com"))
                 .version("1.0.0")
-                .termsOfServiceUrl("http://localhost:8888")
+                .termsOfServiceUrl("http://localhost:9001")
                 .build();
     }
 
@@ -52,17 +51,17 @@ public class SwaggerConfig {
         return new ApiKey("Authorization", "Authorization", "Header");
     }
 
-    private SecurityContext securityContext() {
-        return SecurityContext.builder()
-                .securityReferences(defaultAuth())
-                .forPaths(PathSelectors.regex("/hello/.*"))
-                .build();
-    }
+//    private SecurityContext securityContext() {
+//        return SecurityContext.builder()
+//                .securityReferences(defaultAuth())
+//                .forPaths(PathSelectors.regex("/hello/.*"))
+//                .build();
+//    }
 
-    List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return singletonList(new SecurityReference("Authorization", authorizationScopes));
-    }
+//    List<SecurityReference> defaultAuth() {
+//        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+//        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+//        authorizationScopes[0] = authorizationScope;
+//        return singletonList(new SecurityReference("Authorization", authorizationScopes));
+//    }
 }

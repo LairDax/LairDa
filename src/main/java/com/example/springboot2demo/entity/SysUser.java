@@ -1,8 +1,10 @@
 package com.example.springboot2demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.example.springboot2demo.BaseEntity;
+import com.example.springboot2demo.config.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -21,6 +23,10 @@ import lombok.Setter;
 @TableName("sys_user")
 @ApiModel(value = "SysUser对象", description = "用户表")
 public class SysUser extends BaseEntity {
+
+    @ApiModelProperty("id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
     @ApiModelProperty("姓名")
     @TableField("name")

@@ -1,9 +1,9 @@
 package com.example.springboot2demo.service;
 
-import com.example.springboot2demo.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springboot2demo.model.dto.SysUserDTO;
-import com.example.springboot2demo.model.vo.SysUserVO;
+import com.example.springboot2demo.entity.SysUser;
+import model.dto.SysUserDTO;
+import model.vo.SysUserVO;
 
 import java.util.List;
 
@@ -29,4 +29,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     SysUserVO getSysUserById(Long id);
+
+    /**
+     * 添加用户信息
+     * @param entity
+     * @return
+     */
+    boolean saveUser(SysUser entity);
 }

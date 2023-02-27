@@ -1,8 +1,9 @@
 package com.example.springboot2demo.controller;
 
 import com.example.springboot2demo.common.enums.Result;
-import com.example.springboot2demo.model.dto.SysUserDTO;
-import com.example.springboot2demo.model.vo.SysUserVO;
+import com.example.springboot2demo.entity.SysUser;
+import model.dto.SysUserDTO;
+import model.vo.SysUserVO;
 import com.example.springboot2demo.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,5 +42,10 @@ public class SysUserController {
         return Result.success(sysUserService.getSysUserById(id));
     }
 
+    @PostMapping("/saveUser")
+    @ApiOperation("新增用户信息")
+    public Result<Boolean> saveUser(@RequestBody SysUser entity){
+        return Result.success(sysUserService.saveUser(entity));
+    }
 
 }

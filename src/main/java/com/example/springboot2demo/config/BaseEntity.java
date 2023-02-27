@@ -1,10 +1,11 @@
-package com.example.springboot2demo;
+package com.example.springboot2demo.config;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  * @author xnd
  * @since 2023/2/18 14:15
  */
+@Data
 public class BaseEntity {
     @JsonIgnore
     @ExcelProperty("创建数据的用户")
