@@ -1,6 +1,6 @@
 package com.example.springboot2demo.controller;
 
-import com.example.springboot2demo.common.enums.Result;
+import common.enums.Result;
 import com.example.springboot2demo.entity.SysUser;
 import model.dto.SysUserDTO;
 import model.vo.SysUserVO;

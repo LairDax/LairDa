@@ -1,6 +1,6 @@
-package com.example.springboot2demo.common.exception;
+package common.exception;
 
-import com.example.springboot2demo.common.enums.DataEnums;
+import common.enums.DataEnums;
 
 /**
  * @author xnd

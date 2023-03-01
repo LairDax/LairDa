@@ -1,4 +1,4 @@
-package com.example.springboot2demo.common.enums;
+package common.enums;
 
 /**
  * @author xnd

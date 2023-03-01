@@ -1,7 +1,6 @@
-package com.example.springboot2demo.util;
+package util;
 
-import com.example.springboot2demo.common.caUtils.HTTPUtils;
-import com.example.springboot2demo.common.enums.Constants;
+import common.enums.Constants;
 import com.example.springboot2demo.config.BaseEntity;
 import org.springframework.beans.BeanUtils;
 

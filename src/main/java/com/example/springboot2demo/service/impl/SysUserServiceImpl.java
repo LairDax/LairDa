@@ -1,7 +1,7 @@
 package com.example.springboot2demo.service.impl;
 
-import com.example.springboot2demo.common.enums.DataEnums;
-import com.example.springboot2demo.common.exception.DataException;
+import common.enums.DataEnums;
+import common.exception.DataException;
 import com.example.springboot2demo.entity.SysUser;
 import com.example.springboot2demo.mapper.SysUserMapper;
 import model.dto.SysUserDTO;
