@@ -3,9 +3,10 @@ package com.example.springboot2demo.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import config.BaseEntity;
+import com.example.springboot2demo.config.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Setter
 @TableName("curtain")
 @ApiModel(value = "Curtain对象", description = "窗帘基本信息表")
+@EqualsAndHashCode
 public class Curtain extends BaseEntity {
 
     @ApiModelProperty("窗帘单品id")

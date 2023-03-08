@@ -5,6 +5,7 @@ import com.example.springboot2demo.entity.SysUser;
 import model.dto.SysUserDTO;
 import model.vo.SysUserVO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -36,4 +37,10 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     boolean saveUser(SysUser entity);
+
+    /**
+     * 导出用户信息
+     * @param response
+     */
+    void exportExcel(HttpServletResponse response, SysUserDTO dto) throws ClassNotFoundException;
 }

@@ -11,7 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.springboot2demo.util.ExcelTransfer;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,6 +27,9 @@ import java.util.List;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
+
+    @Autowired
+    private ExcelTransfer<SysUserVO> excelTransfer;
     @Autowired
     private SysUserMapper sysUserMapper;
     @Override
@@ -49,5 +54,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             throw new DataException(DataEnums.FAILED);
         }
         return update;
+    }
+
+    @Override
+    public void exportExcel(HttpServletResponse response, SysUserDTO dto) throws ClassNotFoundException {
+        List<SysUserVO> sysUserVOList = sysUserMapper.listSysUserMessage(dto);
+        excelTransfer.exportExcel(response,sysUserVOList,"用户信息","sheet",SysUserVO.class);
     }
 }

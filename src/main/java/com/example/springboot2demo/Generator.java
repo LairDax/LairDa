@@ -3,7 +3,7 @@ package com.example.springboot2demo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import config.BaseEntity;
+import com.example.springboot2demo.config.BaseEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Arrays;

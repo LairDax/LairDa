@@ -13,11 +13,15 @@ public enum DataEnums {
      * 成功
      */
     SUCCESS("成功", 200),
+
+    /**
+     * 入参数据为空.
+     */
+    DATA_IS_NULL("入参数据为空", 406),
     /**
      * 失败
      */
     FAILED("失败", 500);
-
 
     /**
      * 提示

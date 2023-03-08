@@ -1,4 +1,4 @@
-package config;
+package com.example.springboot2demo.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
