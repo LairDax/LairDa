@@ -1,17 +1,15 @@
-package com.example.springboot2demo.util;
+package com.example.springboot2demo.util.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
 import common.enums.DataEnums;
-import common.excel.ConvertList;
-import common.excel.DataListener;
 import common.exception.DataException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,9 +30,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 @ConfigurationProperties(prefix = "excel.model")
 public class ExcelTransfer<T> {
-    private String packageName;
+    private String packageName = "com.example.springboot2demo.entity";
 
-    private int size;
+    private int size = 40;
 
     /**
      * 上传excel 对用实体类不允许使用链式调用注解
@@ -60,6 +58,7 @@ public class ExcelTransfer<T> {
         }
         return true;
     }
+
     /**
      * 上传excel 对用实体类不允许使用链式调用注解 自定义格式转换
      *
@@ -72,18 +71,22 @@ public class ExcelTransfer<T> {
      *
      * @throws ClassNotFoundException 为找到对应的类
      */
-    public boolean importExcel(MultipartFile file, IService<T> service, ConvertList<T> list) throws ClassNotFoundException {
+    public String importExcel(MultipartFile file, IService<T> service, ConvertList<T> list) throws ClassNotFoundException {
         isEmpty(file);
         String name = service.getClass().getName();
         String s = name.substring(size, name.length() - 11);
         Class<?> aClass = Class.forName(packageName + s);
         try {
-            EasyExcel.read(file.getInputStream(), aClass, new DataListener<>(service, list, aClass)).sheet().doRead();
+            DataListener<T> listener = new DataListener<>(service, list);
+            EasyExcel.read(file.getInputStream(), aClass, listener).sheet().doRead();
+            if (StringUtils.isNotBlank(listener.errorString)) {
+                return listener.errorString;
+            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-            return false;
+            return "false";
         }
-        return true;
+        return "true";
     }
 
     /**
@@ -141,6 +144,7 @@ public class ExcelTransfer<T> {
     public void exportExcel(HttpServletResponse response, List<T> list, String name, String sheet, Class<?> aClass) throws ClassNotFoundException {
         export(response, list, name, sheet, aClass);
     }
+
     private void export(HttpServletResponse response, List<T> list, String name, String sheet, Class<?> aClass) {
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

@@ -23,8 +23,8 @@ import java.util.List;
  * @since 2023-02-18
  */
 @Api(tags = "用户信息管理")
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("/sysUser")
 public class SysUserController {
 
