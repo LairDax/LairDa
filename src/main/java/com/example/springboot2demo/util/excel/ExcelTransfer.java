@@ -59,6 +59,7 @@ public class ExcelTransfer<T> {
         return true;
     }
 
+
     /**
      * 上传excel 对用实体类不允许使用链式调用注解 自定义格式转换
      *

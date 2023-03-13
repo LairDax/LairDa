@@ -37,11 +37,25 @@ public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRe
     @Autowired
     private ExcelTransfer<ParkRecord> excelTransfer;
 
+    /**
+     * 导入
+     * @param file     文件
+     * @param response 返回信息
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     @Override
     public void importExcel(MultipartFile file, HttpServletResponse response) throws ClassNotFoundException, IOException {
+        long size = file.getSize();
         excelTransfer.importExcel(file,this);
+        System.out.println(size);
     }
 
+    /**
+     * 下载模板
+     * @param response 返回信息
+     * @throws ClassNotFoundException
+     */
     @Override
     public void exportExcelDemo(HttpServletResponse response) throws ClassNotFoundException {
         excelTransfer.exportExcel(response, new ArrayList<>(), "停车记录表", "sheet", packRecordBo.class);

@@ -7,6 +7,7 @@ import com.example.springboot2demo.config.BaseEntity;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,14 +19,13 @@ import lombok.Setter;
  * @author xnd
  * @since 2023-03-08
  */
-@Getter
-@Setter
+@Data
 @TableName("park_record")
 @ApiModel(value = "ParkRecord对象", description = "停车记录表")
 public class ParkRecord extends BaseEntity {
 
     @ApiModelProperty("停车记录id")
-      @TableId("park_record_id")
+    @TableId("park_record_id")
     private Long parkRecordId;
 
     @ApiModelProperty("车牌号码")
