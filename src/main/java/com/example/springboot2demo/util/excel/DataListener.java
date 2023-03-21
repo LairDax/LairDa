@@ -9,12 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static java.util.Objects.isNull;
+import java.util.*;
 
 /**
  * @author xnd
@@ -45,7 +40,6 @@ public class DataListener<E> implements ReadListener<E> {
     public DataListener(IService<E> service, Class<?> aClass) {
         this.service = service;
     }
-
     /**
      * 需要转换excel数据，请使用这个构造方法。
      *
@@ -159,6 +153,25 @@ public class DataListener<E> implements ReadListener<E> {
         }
         return set;
     }
+
+    private boolean isNull(E data) throws IllegalAccessException {
+        Class<?> aClass = data.getClass();
+        Field[] fields = aClass.getDeclaredFields();
+        int num = 0;
+        for (Field field : fields) {
+            if ("serialVersionUID".equals(field.getName())) {
+                num++;
+                continue;
+            }
+            field.setAccessible(true);
+            Object o = field.get(data);
+            if (Objects.isNull(o)) {
+                num++;
+            }
+        }
+        return num != fields.length;
+    }
+
 
 
 }

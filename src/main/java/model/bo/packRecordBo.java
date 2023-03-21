@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
  */
 @Data
 public class packRecordBo {
-
     @ExcelProperty("车牌号码")
     private String licenseNumber;
 

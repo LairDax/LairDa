@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ExcelTransfer<T> {
     private String packageName = "com.example.springboot2demo.entity";
 
-    private int size = 40;
+    private int size = 41;
 
     /**
      * 上传excel 对用实体类不允许使用链式调用注解
@@ -41,11 +41,9 @@ public class ExcelTransfer<T> {
      *
      * @param file    文件
      * @param service 对应实体的service
-     * @return 成功与否
-     *
      * @throws ClassNotFoundException
      */
-    public boolean importExcel(MultipartFile file, IService<T> service) throws ClassNotFoundException {
+    public void importExcel(MultipartFile file, IService<T> service) throws ClassNotFoundException {
         isEmpty(file);
         String name = service.getClass().getName();
         String s = name.substring(size, name.length() - 11);
@@ -54,9 +52,7 @@ public class ExcelTransfer<T> {
             EasyExcel.read(file.getInputStream(), aClass, new DataListener<>(service, aClass)).sheet().doRead();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-            return false;
         }
-        return true;
     }
 
 
@@ -76,7 +72,7 @@ public class ExcelTransfer<T> {
         isEmpty(file);
         String name = service.getClass().getName();
         String s = name.substring(size, name.length() - 11);
-        Class<?> aClass = Class.forName(packageName + s);
+        Class<?> aClass = Class.forName(packageName +"."+ s);
         try {
             DataListener<T> listener = new DataListener<>(service, list);
             EasyExcel.read(file.getInputStream(), aClass, listener).sheet().doRead();

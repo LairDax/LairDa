@@ -10,6 +10,7 @@ import com.example.springboot2demo.service.ParkRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import common.enums.Result;
 import com.example.springboot2demo.util.excel.ExcelTransfer;
+import lombok.extern.slf4j.Slf4j;
 import model.bo.packRecordBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,8 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -31,6 +30,7 @@ import java.util.stream.Collectors;
  * @author xnd
  * @since 2023-03-08
  */
+@Slf4j
 @Service
 public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRecord> implements ParkRecordService {
 
@@ -47,8 +47,17 @@ public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRe
     @Override
     public void importExcel(MultipartFile file, HttpServletResponse response) throws ClassNotFoundException, IOException {
         long size = file.getSize();
-        excelTransfer.importExcel(file,this);
-        System.out.println(size);
+        String excel = excelTransfer.importExcel(file, this, list -> {
+            ArrayList<ParkRecord> arrayList = new ArrayList<>();
+            list.forEach(e -> {
+                if (StringUtils.isNotBlank(e.getLicenseNumber())) {
+                    arrayList.add(e);
+                }
+            });
+            return arrayList;
+        });
+        failed(response, excel);
+        log.info(String.valueOf(size));
     }
 
     /**
