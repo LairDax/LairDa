@@ -6,10 +6,13 @@ import com.example.springboot2demo.entity.ParkRecord;
 import com.example.springboot2demo.mapper.ParkRecordMapper;
 import com.example.springboot2demo.service.ParkRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.springboot2demo.util.ThreadPoolProxy;
 import common.enums.Result;
 import com.example.springboot2demo.util.excel.ExcelTransfer;
 import lombok.extern.slf4j.Slf4j;
 import model.bo.packRecordBo;
+import model.dto.ParkRecordDownLoadDTO;
+import model.vo.ParkRecordDownLoadVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * <p>
@@ -30,10 +37,16 @@ import java.util.ArrayList;
  */
 @Slf4j
 @Service
-public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRecord> implements ParkRecordService {
+public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRecord> implements ParkRecordService {
 
     @Autowired
     private ExcelTransfer<ParkRecord> excelTransfer;
+    @Autowired
+    private ThreadPoolProxy threadPoolProxy;
+    @Autowired
+    private ExcelTransfer<ParkRecordDownLoadVO> excelTransfers;
+    @Autowired
+    private ParkRecordMapper parkRecordMapper;
 
     /**
      * 导入
@@ -43,7 +56,8 @@ public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRe
      * @throws IOException
      */
     @Override
-    public void importExcel(MultipartFile file, HttpServletResponse response) throws ClassNotFoundException, IOException {
+    public void importExcel(MultipartFile file, HttpServletResponse response) throws ClassNotFoundException,
+            IOException {
         long size = file.getSize();
         String excel = excelTransfer.importExcel(file, this, list -> {
             ArrayList<ParkRecord> arrayList = new ArrayList<>();
@@ -68,6 +82,29 @@ public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRe
         excelTransfer.exportExcel(response, new ArrayList<>(), "停车记录表", "sheet", packRecordBo.class);
     }
 
+    @Override
+    public void exportExcel(HttpServletResponse response, ParkRecordDownLoadDTO dto) throws ClassNotFoundException {
+        List<ParkRecordDownLoadVO> parkRecordDownLoadVOList = new ArrayList<>();
+        //选择日期
+        LocalDate dateTime = dto.getDateTime();
+        //拼第一个开始时间   07:00:00 ~ 17:59:59
+        LocalDateTime starTime1 = dateTime.atTime(7, 0, 0);
+        LocalDateTime endTime1 = dateTime.atTime(17, 59, 59);
+        //拼第二个开始时间   18:00:00 ~ 23:59:59
+        LocalDateTime starTime2 = dateTime.atTime(18, 0, 0);
+        LocalDateTime endTime2 = dateTime.atTime(23, 59, 59);
+        //拼第三个开始时间   00:00:00 ~ 06:59:59
+        LocalDateTime starTime3 = dateTime.atTime(0, 0, 0);
+        LocalDateTime endTime3 = dateTime.atTime(6, 59, 59);
+        List<ParkRecordDownLoadVO> downLoad1 = parkRecordMapper.listDownLoad1(starTime1, endTime1);
+        List<ParkRecordDownLoadVO> downLoad2 = parkRecordMapper.listDownLoad2(starTime2, endTime2);
+        List<ParkRecordDownLoadVO> downLoad3 = parkRecordMapper.listDownLoad3(starTime3, endTime3);
+        parkRecordDownLoadVOList.addAll(downLoad1);
+        parkRecordDownLoadVOList.addAll(downLoad2);
+        parkRecordDownLoadVOList.addAll(downLoad3);
+        excelTransfers.exportExcel(response, parkRecordDownLoadVOList, "三月定额", "sheet", ParkRecordDownLoadVO.class);
+    }
+
     /**
      * 过滤器返回信息
      *
@@ -81,7 +118,7 @@ public  class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRe
         response.setStatus(HttpServletResponse.SC_OK);
         //输入响应内容
         PrintWriter writer = response.getWriter();
-        String s = JSONArray.toJSON(Result.failed(errorString,200)).toString();
+        String s = JSONArray.toJSON(Result.failed(errorString, 200)).toString();
         writer.write(s);
         writer.flush();
     }

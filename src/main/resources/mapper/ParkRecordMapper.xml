@@ -2,4 +2,111 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springboot2demo.mapper.ParkRecordMapper">
 
+    <select id="listDownLoad1" parameterType="model.vo.ParkRecordDownLoadVO" resultType="model.vo.ParkRecordDownLoadVO">
+        SET
+        @i := 0;
+        SELECT (@i := @i + 1)                       AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
+               '07:00-18:00' AS time,
+	out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽一区停车场组'
+          AND departure_time BETWEEN #{starTime}
+          AND #{endTime}
+        GROUP BY
+            out_door
+        UNION ALL
+        SELECT (@i := @i + 1)                       AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS date_time,
+               '07:00-18:00' AS time,
+	out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽二区停车场组'
+          AND departure_time BETWEEN #{starTime}
+          AND #{endTime}
+        GROUP BY
+            out_door
+    </select>
+    <select id="listDownLoad2" resultType="model.vo.ParkRecordDownLoadVO">
+        SET @a:=0;
+        SELECT
+            (@a:=@a+1) AS num,
+            DATE_FORMAT( departure_time, '%m.%d' ) AS date_time,
+            '18:00-24:00' AS time,
+  out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽一区停车场组'
+          AND departure_time BETWEEN #{starTimeTwo}
+          AND #{endTimeTwo}
+        GROUP BY
+            out_door
+        UNION ALL
+        SELECT
+            (@a:=@a+1) AS num,
+            DATE_FORMAT( departure_time, '%m.%d' ) AS dateTime,
+            '18:00-24:00' AS time,
+  out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽二区停车场组'
+          AND departure_time BETWEEN #{starTimeTwo}
+          AND #{endTimeTwo}
+        GROUP BY
+            out_door
+    </select>
+    <select id="listDownLoad3" resultType="model.vo.ParkRecordDownLoadVO">
+        SET @b:=0;
+        SELECT
+            (@b:=@b+1) AS num,
+            DATE_FORMAT( departure_time, '%m.%d' ) AS dateTime,
+            '00:00-07:00' AS time,
+  out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽一区停车场组'
+          AND departure_time BETWEEN #{starTimeThree}
+          AND #{endTimeThree}
+        GROUP BY
+            out_door
+        UNION ALL
+        SELECT
+            (@b:=@b+1) AS num,
+            DATE_FORMAT( departure_time, '%m.%d' ) AS date_time,
+            '00:00-07:00' AS time,
+  out_door,
+	SUM( total_billing ) AS total_billing,
+	SUM( offline_payable ) AS offline_payable
+        FROM
+            park_record
+        WHERE
+            1 = 1
+          AND park_group_name = '苏州淞泽二区停车场组'
+          AND departure_time BETWEEN #{starTimeThree}
+          AND #{endTimeThree}
+        GROUP BY
+            out_door
+    </select>
 </mapper>
