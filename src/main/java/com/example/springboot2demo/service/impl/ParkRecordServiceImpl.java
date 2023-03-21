@@ -85,6 +85,9 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
     @Override
     public void exportExcel(HttpServletResponse response, ParkRecordDownLoadDTO dto) throws ClassNotFoundException {
         List<ParkRecordDownLoadVO> parkRecordDownLoadVOList = new ArrayList<>();
+        int i = 1;
+        int a = 1;
+        int b = 1;
         //选择日期
         LocalDate dateTime = dto.getDateTime();
         //拼第一个开始时间   07:00:00 ~ 17:59:59
@@ -97,11 +100,31 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
         LocalDateTime starTime3 = dateTime.atTime(0, 0, 0);
         LocalDateTime endTime3 = dateTime.atTime(6, 59, 59);
         List<ParkRecordDownLoadVO> downLoad1 = parkRecordMapper.listDownLoad1(starTime1, endTime1);
+        for (ParkRecordDownLoadVO item:downLoad1) {
+          item.setNum(i++);
+        }
         List<ParkRecordDownLoadVO> downLoad2 = parkRecordMapper.listDownLoad2(starTime2, endTime2);
+        for (ParkRecordDownLoadVO item:downLoad2) {
+            item.setNum(a++);
+        }
         List<ParkRecordDownLoadVO> downLoad3 = parkRecordMapper.listDownLoad3(starTime3, endTime3);
+        for (ParkRecordDownLoadVO item:downLoad3) {
+            item.setNum(b++);
+        }
         parkRecordDownLoadVOList.addAll(downLoad1);
         parkRecordDownLoadVOList.addAll(downLoad2);
         parkRecordDownLoadVOList.addAll(downLoad3);
+        for (ParkRecordDownLoadVO item:parkRecordDownLoadVOList) {
+            if ("苏州淞泽一区停车场北门".equals(item.getOutDoor())){
+                item.setOutDoor("1号门(一区北门)");
+            }else if ("苏州淞泽一区停车场西南门".equals(item.getOutDoor())){
+                item.setOutDoor("2号门(一区西门)");
+            }else if ("苏州淞泽二区停车场南门".equals(item.getOutDoor())){
+                item.setOutDoor("3号门(二区南门)");
+            }else if ("苏州淞泽二区停车场西门".equals(item.getOutDoor())){
+                item.setOutDoor("4号门(二区西门)");
+            }
+        }
         excelTransfers.exportExcel(response, parkRecordDownLoadVOList, "三月定额", "sheet", ParkRecordDownLoadVO.class);
     }
 

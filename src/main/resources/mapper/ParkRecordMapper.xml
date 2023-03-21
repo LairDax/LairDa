@@ -3,9 +3,7 @@
 <mapper namespace="com.example.springboot2demo.mapper.ParkRecordMapper">
 
     <select id="listDownLoad1" parameterType="model.vo.ParkRecordDownLoadVO" resultType="model.vo.ParkRecordDownLoadVO">
-        SET
-        @i := 0;
-        SELECT (@i := @i + 1)                       AS num,
+        SELECT ''AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
                '07:00-18:00' AS time,
 	out_door,
@@ -21,7 +19,7 @@
         GROUP BY
             out_door
         UNION ALL
-        SELECT (@i := @i + 1)                       AS num,
+        SELECT '' AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS date_time,
                '07:00-18:00' AS time,
 	out_door,
@@ -38,11 +36,9 @@
             out_door
     </select>
     <select id="listDownLoad2" resultType="model.vo.ParkRecordDownLoadVO">
-        SET @a:=0;
-        SELECT
-            (@a:=@a+1) AS num,
-            DATE_FORMAT( departure_time, '%m.%d' ) AS date_time,
-            '18:00-24:00' AS time,
+        SELECT ''AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS date_time,
+               '18:00-24:00' AS time,
   out_door,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
@@ -56,10 +52,9 @@
         GROUP BY
             out_door
         UNION ALL
-        SELECT
-            (@a:=@a+1) AS num,
-            DATE_FORMAT( departure_time, '%m.%d' ) AS dateTime,
-            '18:00-24:00' AS time,
+        SELECT ''AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
+               '18:00-24:00' AS time,
   out_door,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
@@ -74,11 +69,9 @@
             out_door
     </select>
     <select id="listDownLoad3" resultType="model.vo.ParkRecordDownLoadVO">
-        SET @b:=0;
-        SELECT
-            (@b:=@b+1) AS num,
-            DATE_FORMAT( departure_time, '%m.%d' ) AS dateTime,
-            '00:00-07:00' AS time,
+        SELECT ''AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
+               '00:00-07:00' AS time,
   out_door,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
@@ -92,10 +85,9 @@
         GROUP BY
             out_door
         UNION ALL
-        SELECT
-            (@b:=@b+1) AS num,
-            DATE_FORMAT( departure_time, '%m.%d' ) AS date_time,
-            '00:00-07:00' AS time,
+        SELECT ''  AS num,
+               DATE_FORMAT(departure_time, '%m.%d') AS date_time,
+               '00:00-07:00' AS time,
   out_door,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
