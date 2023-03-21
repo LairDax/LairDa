@@ -18,6 +18,11 @@ public enum DataEnums {
      * 入参数据为空.
      */
     DATA_IS_NULL("入参数据为空", 406),
+
+    /**
+     * 时间格式错误
+     */
+    TIME_FORMAT_MISTAKE("时间格式错误", 406),
     /**
      * 失败
      */

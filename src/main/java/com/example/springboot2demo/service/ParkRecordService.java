@@ -42,4 +42,11 @@ public interface ParkRecordService extends IService<ParkRecord> {
      * @param dto
      */
     void exportExcel(HttpServletResponse response, ParkRecordDownLoadDTO dto)throws ClassNotFoundException;
+
+    /**
+     * 根据出口时间删除对应停车记录
+     * @param dto
+     * @return
+     */
+    boolean deleteDataByDateTime(ParkRecordDownLoadDTO dto);
 }

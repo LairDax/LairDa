@@ -2,6 +2,7 @@ package com.example.springboot2demo.mapper;
 
 import com.example.springboot2demo.entity.ParkRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import model.dto.ParkRecordDownLoadDTO;
 import model.vo.ParkRecordDownLoadVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -46,4 +47,11 @@ public interface ParkRecordMapper extends BaseMapper<ParkRecord> {
      */
     List<ParkRecordDownLoadVO> listDownLoad3(@Param("starTimeThree")LocalDateTime starTime3,
                                              @Param("endTimeThree")LocalDateTime endTime3);
+
+    /**
+     * 根据出口时间删除对应停车记录
+     * @param dto
+     * @return
+     */
+    boolean deleteDataByDateTime(@Param("deleteDTO") ParkRecordDownLoadDTO dto);
 }

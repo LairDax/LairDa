@@ -7,8 +7,10 @@ import com.example.springboot2demo.mapper.ParkRecordMapper;
 import com.example.springboot2demo.service.ParkRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.springboot2demo.util.ThreadPoolProxy;
+import common.enums.DataEnums;
 import common.enums.Result;
 import com.example.springboot2demo.util.excel.ExcelTransfer;
+import common.exception.DataException;
 import lombok.extern.slf4j.Slf4j;
 import model.bo.packRecordBo;
 import model.dto.ParkRecordDownLoadDTO;
@@ -16,6 +18,7 @@ import model.vo.ParkRecordDownLoadVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -126,6 +129,15 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
             }
         }
         excelTransfers.exportExcel(response, parkRecordDownLoadVOList, "三月定额", "sheet", ParkRecordDownLoadVO.class);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteDataByDateTime(ParkRecordDownLoadDTO dto) {
+        if (dto.getDateTime()==null){
+            throw  new DataException(DataEnums.TIME_FORMAT_MISTAKE);
+        }
+        return parkRecordMapper.deleteDataByDateTime(dto);
     }
 
     /**

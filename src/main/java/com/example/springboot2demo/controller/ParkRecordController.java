@@ -1,6 +1,7 @@
 package com.example.springboot2demo.controller;
 
 import com.example.springboot2demo.service.ParkRecordService;
+import common.enums.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,12 @@ public class ParkRecordController {
     @ApiOperation("停车记录定额报表导出")
     public void downloadTemplate(HttpServletResponse response,@RequestBody ParkRecordDownLoadDTO dto) throws Exception {
         parkRecordService.exportExcel(response,dto);
+    }
+
+    @PostMapping("deleteDataByDateTime")
+    @ApiOperation("根据出口时间删除对应停车记录")
+    public Result<Boolean> deleteDataByDateTime(@RequestBody ParkRecordDownLoadDTO dto){
+       return Result.success(parkRecordService.deleteDataByDateTime(dto));
     }
 
 
