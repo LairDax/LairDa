@@ -91,11 +91,11 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
         int i = 1;
         int a = 1;
         int b = 1;
-        //选择日期
-        LocalDate dateTime = dto.getDateTime();
-        if (dateTime==null){
+        if (dto.getDateTime()==null){
             throw  new DataException(DataEnums.TIME_FORMAT_MISTAKE);
         }
+        //选择日期
+        LocalDate dateTime = dto.getDateTime();
         //拼第一个开始时间   07:00:00 ~ 17:59:59
         LocalDateTime starTime1 = dateTime.atTime(7, 0, 0);
         LocalDateTime endTime1 = dateTime.atTime(17, 59, 59);
