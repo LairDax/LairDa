@@ -1,7 +1,7 @@
 package com.example.springboot2demo.util;
 
 import common.enums.Constants;
-import com.example.springboot2demo.config.BaseEntity;
+import model.base.BaseEntity;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;

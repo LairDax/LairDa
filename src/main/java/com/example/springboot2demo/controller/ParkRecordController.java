@@ -4,6 +4,7 @@ import com.example.springboot2demo.service.ParkRecordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import model.dto.ParkRecordDownLoadDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,4 +40,12 @@ public class ParkRecordController {
     public void exportExcelDemo(HttpServletResponse response) throws ClassNotFoundException {
         parkRecordService.exportExcelDemo(response);
     }
+
+    @PostMapping("/downloadTemplate")
+    @ApiOperation("停车记录定额报表导出")
+    public void downloadTemplate(HttpServletResponse response,@RequestBody ParkRecordDownLoadDTO dto) throws Exception {
+        parkRecordService.exportExcel(response,dto);
+    }
+
+
 }

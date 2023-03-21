@@ -2,8 +2,6 @@ package com.example.springboot2demo.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.springboot2demo.config.BaseEntity;
 import com.example.springboot2demo.entity.ParkRecord;
 import com.example.springboot2demo.mapper.ParkRecordMapper;
 import com.example.springboot2demo.service.ParkRecordService;

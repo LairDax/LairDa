@@ -1,4 +1,4 @@
-package com.example.springboot2demo.config;
+package model.base;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
