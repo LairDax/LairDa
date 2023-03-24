@@ -4,19 +4,26 @@
     <delete id="deleteDataByDateTime">
         DELETE
         FROM
-            park_record
+        park_record
         WHERE
-            1 = 1
+        1 = 1
         <if test="deleteDTO.dateTime != null">
-          AND DATE_FORMAT( departure_time, '%Y-%m-%d' ) = #{deleteDTO.dateTime}
+            AND DATE_FORMAT( departure_time, '%Y-%m-%d' ) = #{deleteDTO.dateTime}
         </if>
     </delete>
 
     <select id="listDownLoad1" parameterType="model.vo.ParkRecordDownLoadVO" resultType="model.vo.ParkRecordDownLoadVO">
-        SELECT ''AS num,
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
                '07:00-18:00' AS time,
-	out_door,
+	CASE
+
+		WHEN out_door = '苏州淞泽一区停车场北门' THEN
+		'1号门(一区北门)'
+		WHEN out_door = '苏州淞泽一区停车场西南门' THEN
+		'2号门(一区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -24,15 +31,26 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽一区停车场组'
-          AND departure_time BETWEEN #{starTime}
-          AND #{endTime}
-        GROUP BY
-            out_door
-        UNION ALL
-        SELECT '' AS num,
+          AND departure_time BETWEEN
+        #{starTime}
+        AND
+        #{endTime}
+        GROUP
+        BY
+        out_door
+        UNION
+        ALL
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS date_time,
                '07:00-18:00' AS time,
-	out_door,
+	CASE
+
+		WHEN out_door = '苏州淞泽二区停车场南门' THEN
+		'3号门(二区南门)'
+		WHEN out_door = '苏州淞泽二区停车场西门' THEN
+		'4号门(二区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -40,16 +58,28 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽二区停车场组'
-          AND departure_time BETWEEN #{starTime}
-          AND #{endTime}
-        GROUP BY
-            out_door
+          AND departure_time BETWEEN
+        #{starTime}
+        AND
+        #{endTime}
+        GROUP
+        BY
+        out_door
+        ORDER
+        BY
+        out_door
     </select>
     <select id="listDownLoad2" resultType="model.vo.ParkRecordDownLoadVO">
-        SELECT ''AS num,
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS date_time,
                '18:00-24:00' AS time,
-  out_door,
+ CASE
+		WHEN out_door = '苏州淞泽一区停车场北门' THEN
+		'1号门(一区北门)'
+		WHEN out_door = '苏州淞泽一区停车场西南门' THEN
+		'2号门(一区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -57,15 +87,26 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽一区停车场组'
-          AND departure_time BETWEEN #{starTimeTwo}
-          AND #{endTimeTwo}
-        GROUP BY
-            out_door
-        UNION ALL
-        SELECT ''AS num,
+          AND departure_time BETWEEN
+        #{starTimeTwo}
+        AND
+        #{endTimeTwo}
+        GROUP
+        BY
+        out_door
+        UNION
+        ALL
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
                '18:00-24:00' AS time,
-  out_door,
+ CASE
+
+		WHEN out_door = '苏州淞泽二区停车场南门' THEN
+		'3号门(二区南门)'
+		WHEN out_door = '苏州淞泽二区停车场西门' THEN
+		'4号门(二区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -73,16 +114,29 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽二区停车场组'
-          AND departure_time BETWEEN #{starTimeTwo}
-          AND #{endTimeTwo}
-        GROUP BY
-            out_door
+          AND departure_time BETWEEN
+        #{starTimeTwo}
+        AND
+        #{endTimeTwo}
+        GROUP
+        BY
+        out_door
+        ORDER
+        BY
+        out_door
     </select>
     <select id="listDownLoad3" resultType="model.vo.ParkRecordDownLoadVO">
-        SELECT ''AS num,
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS dateTime,
                '00:00-07:00' AS time,
-  out_door,
+ CASE
+
+		WHEN out_door = '苏州淞泽一区停车场北门' THEN
+		'1号门(一区北门)'
+		WHEN out_door = '苏州淞泽一区停车场西南门' THEN
+		'2号门(一区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -90,15 +144,26 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽一区停车场组'
-          AND departure_time BETWEEN #{starTimeThree}
-          AND #{endTimeThree}
-        GROUP BY
-            out_door
-        UNION ALL
-        SELECT ''  AS num,
+          AND departure_time BETWEEN
+        #{starTimeThree}
+        AND
+        #{endTimeThree}
+        GROUP
+        BY
+        out_door
+        UNION
+        ALL
+        SELECT ''                                   AS num,
                DATE_FORMAT(departure_time, '%m.%d') AS date_time,
                '00:00-07:00' AS time,
-  out_door,
+  CASE
+
+		WHEN out_door = '苏州淞泽二区停车场南门' THEN
+		'3号门(二区南门)'
+		WHEN out_door = '苏州淞泽二区停车场西门' THEN
+		'4号门(二区西门)'
+        END out_door
+        ,
 	SUM( total_billing ) AS total_billing,
 	SUM( offline_payable ) AS offline_payable
         FROM
@@ -106,9 +171,15 @@
         WHERE
             1 = 1
           AND park_group_name = '苏州淞泽二区停车场组'
-          AND departure_time BETWEEN #{starTimeThree}
-          AND #{endTimeThree}
-        GROUP BY
-            out_door
+          AND departure_time BETWEEN
+        #{starTimeThree}
+        AND
+        #{endTimeThree}
+        GROUP
+        BY
+        out_door
+        ORDER
+        BY
+        out_door
     </select>
 </mapper>
