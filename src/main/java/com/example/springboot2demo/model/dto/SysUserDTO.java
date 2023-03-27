@@ -1,4 +1,4 @@
-package model.dto;
+package com.example.springboot2demo.model.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;

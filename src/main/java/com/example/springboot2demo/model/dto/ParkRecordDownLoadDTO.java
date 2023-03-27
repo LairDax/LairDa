@@ -1,12 +1,10 @@
-package model.dto;
+package com.example.springboot2demo.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import model.base.DateDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author xnd

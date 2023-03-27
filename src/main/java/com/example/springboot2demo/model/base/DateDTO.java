@@ -1,4 +1,4 @@
-package model.base;
+package com.example.springboot2demo.model.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;

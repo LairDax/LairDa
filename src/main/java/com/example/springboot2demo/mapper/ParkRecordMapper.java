@@ -2,8 +2,8 @@ package com.example.springboot2demo.mapper;
 
 import com.example.springboot2demo.entity.ParkRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import model.dto.ParkRecordDownLoadDTO;
-import model.vo.ParkRecordDownLoadVO;
+import com.example.springboot2demo.model.dto.ParkRecordDownLoadDTO;
+import com.example.springboot2demo.model.vo.ParkRecordDownLoadVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

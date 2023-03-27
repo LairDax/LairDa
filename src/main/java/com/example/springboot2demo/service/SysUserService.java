@@ -2,8 +2,8 @@ package com.example.springboot2demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.springboot2demo.entity.SysUser;
-import model.dto.SysUserDTO;
-import model.vo.SysUserVO;
+import com.example.springboot2demo.model.dto.SysUserDTO;
+import com.example.springboot2demo.model.vo.SysUserVO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;

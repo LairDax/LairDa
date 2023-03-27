@@ -1,4 +1,4 @@
-package model.vo;
+package com.example.springboot2demo.model.vo;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.fasterxml.jackson.annotation.JsonFormat;

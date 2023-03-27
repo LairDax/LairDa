@@ -1,4 +1,4 @@
-package model.bo;
+package com.example.springboot2demo.model.bo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableField;

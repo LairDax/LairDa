@@ -2,8 +2,8 @@ package com.example.springboot2demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.springboot2demo.entity.SysUser;
-import model.dto.SysUserDTO;
-import model.vo.SysUserVO;
+import com.example.springboot2demo.model.dto.SysUserDTO;
+import com.example.springboot2demo.model.vo.SysUserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

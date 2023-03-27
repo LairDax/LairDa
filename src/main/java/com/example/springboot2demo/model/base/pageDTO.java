@@ -1,4 +1,4 @@
-package model.base;
+package com.example.springboot2demo.model.base;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.annotation.JsonIgnore;

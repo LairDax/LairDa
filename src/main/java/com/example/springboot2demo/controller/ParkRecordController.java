@@ -5,15 +5,13 @@ import common.enums.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import model.base.DateDTO;
-import model.dto.ParkRecordDownLoadDTO;
+import com.example.springboot2demo.model.dto.ParkRecordDownLoadDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * <p>
