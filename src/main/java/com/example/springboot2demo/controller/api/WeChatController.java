@@ -32,8 +32,7 @@ public class WeChatController {
 
     @GetMapping("/MP_verify_DZcAbTjXNzdrQaVW.txt")
     @ApiOperation("auth")
-    public String getCode() {
-
+    public String getAuth() {
         return "DZcAbTjXNzdrQaVW";
     }
 
