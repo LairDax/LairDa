@@ -72,10 +72,10 @@ public class WeChatApiController {
         String res = HttpUtil.get(url, paramMap);
         WeChatVO wxLoginVOx = JSONObject.parseObject(res, WeChatVO.class);
         String openId = wxLoginVOx.getOpenId();
-        String accessToken = wxLoginVOx.getAccessToken();
         wxLoginVOx.setOpenId(openId);
+        String accessToken = getAccessToken();
         wxLoginVOx.setAccessToken(accessToken);
-//        String message = sendMessage(openId);
+//        String message = sendMessage(openId,accessToken);
         log.info("根据code查询得到openId:{}",openId);
         log.info("根据code查询得到accessToken:{}",accessToken);
 //        log.info("模板消息内容{}",message);
@@ -150,6 +150,7 @@ public class WeChatApiController {
         log.info("结果是: {}",forEntity.getBody());
         JSONObject jsonObject = JSONObject.parseObject(forEntity.getBody());
         // 0
+        assert jsonObject != null;
         String messageCode = jsonObject.getString("errcode");
         // 2431260672639467520
         String msgId = jsonObject.getString("msgid");
