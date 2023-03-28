@@ -41,25 +41,24 @@ public class WeChatApiController {
 //    @Value("${wx.config.appSecret}")
 //   private   String appSecret;
 
-//    //1.先查询code
-    // TODO: 2023/3/27  后台获取code失败了,我选择放弃  让前台传吧
-//    @RequestMapping("/getCode")
-//    public String getCode() {
-//        // 官方地址
-//        String urlFir = "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
-//        // 微信申请的域名(提前准备)
-//        String domain = "www.chunkangkeji.com";
-//        // 自定义跳转方法
-//        String redirectMethod = "/weixinoauth";
-//        // 地址进行encode转译 (未转译的地址是：http://pay.xxx.cn/wxpay/weixinoauth)
-//        // 转译后的地址是: http%3A%2F%2Fpay.xxx.cn%2Fwxpay%2Fweixinoauth
-//        String encoderUrl = getURLEncoderString(domain + redirectMethod);
-//        log.info(urlFir +weChatConfigVO.getAppId() + "&redirect_uri=" + encoderUrl +"&response_type=code&scope=snsapi_base" +
-//                "&state=STATE" + "#wechat_redirect");
-//        return urlFir + weChatConfigVO.getAppId() + "&redirect_uri=" + encoderUrl +"&response_type=code&scope=snsapi_base" +
-//                "&state=STATE" +
-//                "#wechat_redirect";
-//    }
+    //1.先查询code
+    @GetMapping("/getCode")
+    public String getCode() {
+        // 官方地址
+        String urlFir = "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
+        // 微信申请的域名(提前准备)
+        String domain = "http://kecc2a.natappfree.cc";
+        // 自定义跳转方法
+        String redirectMethod = "/api/weiXinLoginAuth/wxpay/weXinLoginAuth";
+        // 地址进行encode转译 (未转译的地址是：http://pay.xxx.cn/wxpay/weixinoauth)
+        // 转译后的地址是: http%3A%2F%2Fpay.xxx.cn%2Fwxpay%2Fweixinoauth
+        String encoderUrl = getURLEncoderString(domain + redirectMethod);
+        log.info(urlFir +weChatConfigVO.getAppId() + "&redirect_uri=" + encoderUrl +"&response_type=code&scope=snsapi_userinfo" +
+                "&state=STATE" + "#wechat_redirect");
+        return urlFir + weChatConfigVO.getAppId() + "&redirect_uri=" + encoderUrl +"&response_type=code&scope=snsapi_userinfo" +
+                "&state=STATE" +
+                "#wechat_redirect";
+    }
 
 
     //2.根据code获取openId
@@ -73,15 +72,19 @@ public class WeChatApiController {
         String res = HttpUtil.get(url, paramMap);
         WeChatVO wxLoginVOx = JSONObject.parseObject(res, WeChatVO.class);
         String openId = wxLoginVOx.getOpenId();
-        String token = wxLoginVOx.getToken();
+        String accessToken = wxLoginVOx.getAccessToken();
+        wxLoginVOx.setOpenId(openId);
+        wxLoginVOx.setAccessToken(accessToken);
+//        String message = sendMessage(openId);
         log.info("根据code查询得到openId:{}",openId);
-        log.info("根据code查询得到token:{}",token);
+        log.info("根据code查询得到accessToken:{}",accessToken);
+//        log.info("模板消息内容{}",message);
      return wxLoginVOx;
     }
 
     @GetMapping("/getToken")
     //获取微信基础accessToken
-    public void getAccessToken() throws Exception{
+    public String getAccessToken() throws Exception{
         String url =
                 "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+ weChatConfigVO.getAppId() +
                         "&secret=" + weChatConfigVO.getAppSecret();
@@ -89,6 +92,7 @@ public class WeChatApiController {
         JSONObject jsonObject = JSONObject.parseObject(res);
         String accessToken = jsonObject.getString("access_token");
         log.info("accessToken：{}", accessToken);
+        return accessToken;
     }
 
     /**
@@ -112,15 +116,17 @@ public class WeChatApiController {
      * {{remark.DATA}}
      */
     @GetMapping("/sendMessage")
-    public String sendMessage() {
+    public String sendMessage(String openId, String accessToken) throws Exception {
         // 模板参数
         Map<String, WeChatTemplateMsg> sendMag = new HashMap<String, WeChatTemplateMsg>();
         // openId代表一个唯一微信用户，即微信消息的接收人
-        String openId = "xxx";
+//        String openId = "oCuOVwx86jEja8CTGzzhs2D-D6ng";
         // 公众号的模板id(也有相应的接口可以查询到)
         String templateId = "GHJNUoZtoVvAs2FD7c0ATtdUqONBMkIj2SOh6nNT7EQ";
         // 微信的基础accessToken
-        String accessToken = "微信生成的基础token";
+//        String accessToken = getAccessToken();
+        // String accessToken = "67_6UbZdZoUhOQ" +
+         //        "-QSyuHmUvEy1TZHVIr4Bjkdhtg751X1LquRM93xk7PGXQyt1pWFF6MHlIOBXWVVdzaGwHD1IqWUAQ8YTvdT_fu2ipAYZ0NHU";
         String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + accessToken;
         //推送模板详情
         sendMag.put("first", new WeChatTemplateMsg("f123"));

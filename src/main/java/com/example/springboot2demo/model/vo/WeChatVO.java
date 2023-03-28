@@ -12,5 +12,5 @@ public class WeChatVO {
     @ApiModelProperty("微信开放id")
     private String openId;
 
-    private String token;
+    private String accessToken;
 }
