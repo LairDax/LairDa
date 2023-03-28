@@ -75,10 +75,8 @@ public class WeChatApiController {
         wxLoginVOx.setOpenId(openId);
         String accessToken = getAccessToken();
         wxLoginVOx.setAccessToken(accessToken);
-//        String message = sendMessage(openId,accessToken);
         log.info("根据code查询得到openId:{}",openId);
         log.info("根据code查询得到accessToken:{}",accessToken);
-//        log.info("模板消息内容{}",message);
      return wxLoginVOx;
     }
 
