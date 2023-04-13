@@ -1,6 +1,6 @@
 package com.example.springboot2demo.mapper;
 
-import com.example.springboot2demo.entity.ParkRecord;
+import com.example.springboot2demo.model.entity.ParkRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.springboot2demo.model.dto.ParkRecordDownLoadDTO;
 import com.example.springboot2demo.model.vo.ParkRecordDownLoadVO;

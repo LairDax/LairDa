@@ -1,7 +1,7 @@
 package com.example.springboot2demo.controller;
 
 import com.example.springboot2demo.service.ParkRecordService;
-import common.enums.Result;
+import com.example.springboot2demo.common.enums.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

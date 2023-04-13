@@ -1,4 +1,4 @@
-package common.enums;
+package com.example.springboot2demo.common.enums;
 
 import lombok.Data;
 

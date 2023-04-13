@@ -1,6 +1,6 @@
 package com.example.springboot2demo.service;
 
-import com.example.springboot2demo.entity.Curtain;
+import com.example.springboot2demo.model.entity.Curtain;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author xnd
- * @since 2023-03-08
+ * @since 2023-04-13
  */
 public interface CurtainService extends IService<Curtain> {
-
 
 }

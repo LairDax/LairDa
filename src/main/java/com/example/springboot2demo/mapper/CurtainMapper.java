@@ -1,6 +1,6 @@
 package com.example.springboot2demo.mapper;
 
-import com.example.springboot2demo.entity.Curtain;
+import com.example.springboot2demo.model.entity.Curtain;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author xnd
- * @since 2023-03-08
+ * @since 2023-04-13
  */
 @Mapper
 public interface CurtainMapper extends BaseMapper<Curtain> {

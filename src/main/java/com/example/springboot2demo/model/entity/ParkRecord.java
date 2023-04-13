@@ -1,4 +1,4 @@
-package com.example.springboot2demo.entity;
+package com.example.springboot2demo.model.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;

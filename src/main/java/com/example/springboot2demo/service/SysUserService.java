@@ -1,7 +1,7 @@
 package com.example.springboot2demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springboot2demo.entity.SysUser;
+import com.example.springboot2demo.model.entity.SysUser;
 import com.example.springboot2demo.model.dto.SysUserDTO;
 import com.example.springboot2demo.model.vo.SysUserVO;
 

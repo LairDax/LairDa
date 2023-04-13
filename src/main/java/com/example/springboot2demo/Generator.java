@@ -30,7 +30,7 @@ public class Generator {
                         .disableOpenDir()
                         .outputDir(projectPath  + "/src/main/java"))
                 .packageConfig(builder ->builder.parent("com.example.springboot2demo")
-                        .entity("entity")
+                        .entity("model.entity")
                         .service("service")
                         .serviceImpl("service.impl")
                         .mapper("mapper")

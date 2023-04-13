@@ -1,6 +1,6 @@
 package com.example.springboot2demo.service;
 
-import com.example.springboot2demo.entity.ParkRecord;
+import com.example.springboot2demo.model.entity.ParkRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.springboot2demo.model.dto.ParkRecordDownLoadDTO;
 import org.springframework.web.multipart.MultipartFile;
