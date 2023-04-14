@@ -37,4 +37,4 @@ wx:
     appSecret: c394f50f6135db5ed655ad8d49ce3253
 excel:
   model:
-    package-name: com.example.springboot2demo.entity
+    package-name: com.example.springboot2demo.model.entity.

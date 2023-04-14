@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,9 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
         }
         //选择日期
         LocalDate dateTime = dto.getDateTime();
+        String s = dateTime.toString();
+        String month = s.substring(5, 7);
+        int day = dateTime.getDayOfMonth();
         //拼第一个开始时间   07:00:00 ~ 17:59:59
         LocalDateTime starTime1 = dateTime.atTime(7, 0, 0);
         LocalDateTime endTime1 = dateTime.atTime(17, 59, 59);
@@ -123,7 +127,8 @@ public class ParkRecordServiceImpl extends ServiceImpl<ParkRecordMapper, ParkRec
         }
         downLoad3.add(parkRecordDownLoadVO);
         parkRecordDownLoadVOList.addAll(downLoad3);
-        excelTransfers.exportExcel(response, parkRecordDownLoadVOList, "三月定额", "sheet", ParkRecordDownLoadVO.class);
+        excelTransfers.exportExcel(response, parkRecordDownLoadVOList, month+"月"+day+"定额", "sheet",
+                ParkRecordDownLoadVO.class);
     }
 
     @Override

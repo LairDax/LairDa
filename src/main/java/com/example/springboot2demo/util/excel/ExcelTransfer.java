@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 @ConfigurationProperties(prefix = "excel.model")
 public class ExcelTransfer<T> {
-    private String packageName = "com.example.springboot2demo.entity";
+    private String packageName = "com.example.springboot2demo.model.entity.";
 
     private int size = 41;
 
@@ -72,7 +72,7 @@ public class ExcelTransfer<T> {
         isEmpty(file);
         String name = service.getClass().getName();
         String s = name.substring(size, name.length() - 11);
-        Class<?> aClass = Class.forName(packageName +"."+ s);
+        Class<?> aClass = Class.forName(packageName + s);
         try {
             DataListener<T> listener = new DataListener<>(service, list);
             EasyExcel.read(file.getInputStream(), aClass, listener).sheet().doRead();
