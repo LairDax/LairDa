@@ -1,4 +1,4 @@
-package com.example.springboot2demo.util;
+package com.example.springboot2demo.common.exeirtorCommon.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.example.springboot2demo.util.excel;
+package com.example.springboot2demo.common.exeirtorCommon.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
@@ -6,8 +6,8 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springboot2demo.common.enums.DataEnums;
-import com.example.springboot2demo.common.exception.DataException;
+import com.example.springboot2demo.common.javaCommon.enums.DataEnums;
+import com.example.springboot2demo.common.javaCommon.exception.DataException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;

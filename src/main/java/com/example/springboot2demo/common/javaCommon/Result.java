@@ -1,5 +1,6 @@
-package com.example.springboot2demo.common.enums;
+package com.example.springboot2demo.common.javaCommon;
 
+import com.example.springboot2demo.common.javaCommon.enums.DataEnums;
 import lombok.Data;
 
 /**

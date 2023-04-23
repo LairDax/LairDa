@@ -1,4 +1,4 @@
-package com.example.springboot2demo.util;
+package com.example.springboot2demo.common.exeirtorCommon.util;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

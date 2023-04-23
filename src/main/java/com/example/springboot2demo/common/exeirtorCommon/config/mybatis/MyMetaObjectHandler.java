@@ -1,4 +1,4 @@
-package com.example.springboot2demo.config;
+package com.example.springboot2demo.common.exeirtorCommon.config.mybatis;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;

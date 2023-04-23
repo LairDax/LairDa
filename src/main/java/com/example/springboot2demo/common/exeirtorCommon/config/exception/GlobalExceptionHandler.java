@@ -1,6 +1,7 @@
-package com.example.springboot2demo.common.exception;
+package com.example.springboot2demo.common.exeirtorCommon.config.exception;
 
-import com.example.springboot2demo.common.enums.Result;
+import com.example.springboot2demo.common.javaCommon.Result;
+import com.example.springboot2demo.common.javaCommon.exception.DataException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

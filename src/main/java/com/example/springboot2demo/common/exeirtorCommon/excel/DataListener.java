@@ -1,4 +1,4 @@
-package com.example.springboot2demo.util.excel;
+package com.example.springboot2demo.common.exeirtorCommon.excel;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.data.ReadCellData;

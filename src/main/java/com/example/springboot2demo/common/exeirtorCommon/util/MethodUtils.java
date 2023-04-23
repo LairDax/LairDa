@@ -1,6 +1,6 @@
-package com.example.springboot2demo.util;
+package com.example.springboot2demo.common.exeirtorCommon.util;
 
-import com.example.springboot2demo.common.enums.Constants;
+import com.example.springboot2demo.common.javaCommon.enums.Constants;
 import com.example.springboot2demo.model.base.BaseEntity;
 import org.springframework.beans.BeanUtils;
 
